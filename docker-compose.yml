@@ -1,0 +1,10 @@
+version: '2'
+services:
+  mydt:
+    image: "mcchae/vbuntu-pyenv"
+    hostname: "mydt"
+    ports:
+      - "33899:3389"
+    volumes:
+      - ${HOME}/dhv/vbuntu/root:/root
+      - ${HOME}/work:/root/work
