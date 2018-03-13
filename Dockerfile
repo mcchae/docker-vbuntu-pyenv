@@ -2,11 +2,20 @@ FROM mcchae/vbuntu-ide
 MAINTAINER MoonChang Chae mcchae@gmail.com
 LABEL Description="ubuntu desktop env with pyenv (over xfce with xrdp)"
 
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update \
+    && apt-get install -y \
+        libbz2-dev zlib1g-dev libncurses5-dev openssl libssl-dev \
+        libreadline-dev libsqlite3-dev \
+    && apt-get clean \
+    && apt-get autoclean
+
 ################################################################################
 # pyenv install
 ################################################################################
 # next pyenv need bash
-RUN mkdir -p /usr/local/toor
+RUN mkdir -p /usr/local/toor \
+    && mv /bin/sh /bin/sh.org && ln -s /bin/bash /bin/sh
 USER root
 ENV HOME=/usr/local/toor \
     SHELL=/bin/bash
