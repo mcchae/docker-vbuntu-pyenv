@@ -11,6 +11,14 @@ RUN apt-get update \
     && apt-get autoclean
 
 ################################################################################
+# to solve error:
+#   - ModuleNotFoundError: No module named '_ctypes' : libffi-dev
+################################################################################
+RUN apt-get install -y libffi-dev \
+    && apt-get clean \
+    && apt-get autoclean
+
+################################################################################
 # pyenv install
 ################################################################################
 # next pyenv need bash
@@ -21,7 +29,8 @@ ENV HOME=/usr/local/toor \
     SHELL=/bin/bash
 WORKDIR /root
 #ENV PYTHON_VERSION=${PYTHON_VERSION:-3.5.3}
-ENV PYTHON_VERSION=${PYTHON_VERSION:-3.6.6}
+#ENV PYTHON_VERSION=${PYTHON_VERSION:-3.6.6}
+ENV PYTHON_VERSION=${PYTHON_VERSION:-3.7.3}
 ENV PYENV_ROOT=${HOME}/.pyenv
 ENV PATH=${PYENV_ROOT}/bin:${PATH}
 RUN  curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer -o ${HOME}/pyenv-installer.sh \
